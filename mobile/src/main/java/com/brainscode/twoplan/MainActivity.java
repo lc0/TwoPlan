@@ -7,7 +7,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
@@ -22,6 +26,25 @@ public class MainActivity extends AppCompatActivity {
 
         final UnicreditWrapper unicreditWrapper = new UnicreditWrapper("e80cecaf-e421-46e2-b8cf-9546e992e8ef");
         unicreditWrapper.execute();
+
+        WebView webview = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        webview.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.i("Webview", "Processing webview url click...");
+                view.loadUrl(url);
+                return true;
+            }
+
+
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Log.e("Webview", "Error: " + description);
+                Toast.makeText(getParent(), "Oh no! " + description, Toast.LENGTH_SHORT).show();
+            }
+        });
+        webview.loadUrl("http://twoplan.herokuapp.com");
 
         final Button btnFetchTransactions = (Button) findViewById(R.id.btnFetchTransactions);
         btnFetchTransactions.setOnClickListener(new View.OnClickListener() {
