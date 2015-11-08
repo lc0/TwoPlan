@@ -1,5 +1,8 @@
 package com.brainscode.twoplan;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -36,5 +39,20 @@ public class Transaction implements Serializable {
                 "amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    public String toJson(String user) {
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("user", user);
+            obj.put("description", getDescription());
+            obj.put("amount", getAmount());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return obj.toString();
     }
 }

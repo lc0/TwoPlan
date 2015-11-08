@@ -57,6 +57,9 @@ public class ClassifyActivity extends Activity {
             @Override
             public void onRightCardExit(Object dataObject) {
                 Toast.makeText(ClassifyActivity.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
+                Log.d("here is right: ", ((Transaction) dataObject).toString());
+
+                new TransactionLabel((Transaction) dataObject, "Igor").execute();
             }
 
             @Override
