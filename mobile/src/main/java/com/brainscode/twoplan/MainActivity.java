@@ -27,16 +27,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(getApplicationContext(), ClassifyActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+
                 List<Transaction> transactions = unicreditWrapper.getTransactions();
                 if (transactions != null) {
                     Log.d("transactions", transactions.toString());
 
                     for (int i=0; i<10; i++) {
-                        Intent intent = new Intent();
+                        Intent notificationIntent = new Intent();
                         intent.setAction("com.brainscode.twoplan.SHOW_NOTIFICATION");
                         intent.putExtra("New transaction", transactions.get(i).toString());
                         Log.d("notification", transactions.get(i).toString());
-                        sendBroadcast(intent);
+                        sendBroadcast(notificationIntent);
                     }
                 }
 
