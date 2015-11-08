@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 List<Transaction> transactions = unicreditWrapper.getTransactions();
                 if (transactions != null) {
                     Log.d("transactions", transactions.toString());
+                    Toast.makeText(getApplicationContext(), "Fetched " +
+                            Integer.toString(transactions.size()) + " transactions", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(getApplicationContext(), ClassifyActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
