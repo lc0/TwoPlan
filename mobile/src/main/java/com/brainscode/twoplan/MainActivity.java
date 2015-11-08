@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 List<Transaction> transactions = unicreditWrapper.getTransactions();
                 if (transactions != null) {
                     Log.d("transactions", transactions.toString());

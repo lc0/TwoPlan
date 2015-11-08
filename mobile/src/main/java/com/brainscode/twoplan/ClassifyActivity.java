@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
@@ -80,6 +81,22 @@ public class ClassifyActivity extends Activity {
             @Override
             public void onItemClicked(int itemPosition, Object dataObject) {
                 makeToast(ClassifyActivity.this, "Clicked!");
+            }
+        });
+
+        final Button btnLeft = (Button) findViewById(R.id.left);
+        btnLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flingContainer.getTopCardListener().selectLeft();
+            }
+        });
+
+        final Button btnRight = (Button) findViewById(R.id.right);
+        btnRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flingContainer.getTopCardListener().selectRight();
             }
         });
     }
