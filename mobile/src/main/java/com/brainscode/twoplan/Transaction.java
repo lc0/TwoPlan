@@ -35,10 +35,8 @@ public class Transaction implements Serializable {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "amount=" + amount +
-                ", description='" + description + '\'' +
-                '}';
+        return "Transaction:\n\n" +
+                "amount: " + getAmount() + " " + getCurrency() + " \n\n" + getDescription();
     }
 
     public String toJson(String user) {
