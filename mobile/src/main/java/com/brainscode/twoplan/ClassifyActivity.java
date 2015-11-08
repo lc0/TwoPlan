@@ -18,6 +18,8 @@ import java.util.List;
 
 public class ClassifyActivity extends Activity {
 
+    private List<Transaction> transactions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,21 +28,14 @@ public class ClassifyActivity extends Activity {
         //add the view via xml or programmatically
         final SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
-        final ArrayList<String> al = new ArrayList<String>();
-        al.add("php");
-        al.add("c");
-        al.add("python");
-        al.add("java");
-
         if (getIntent().getExtras() != null) {
-            List<Transaction> transactions = (List<Transaction>)getIntent().getExtras().getSerializable("transactions");
+            transactions = (List<Transaction>)getIntent().getExtras().getSerializable("transactions");
             for(Transaction tr : transactions) {
                 Log.d("=======","Data " + tr.toString());
             }
         }
 
-        //choose your favorite adapter
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.item, R.id.helloText, al);
+        final ArrayAdapter<Transaction> arrayAdapter = new ArrayAdapter<Transaction>(this, R.layout.item, R.id.helloText, transactions);
 
         //set the listener and the adapter
         flingContainer.setAdapter(arrayAdapter);
@@ -49,7 +44,7 @@ public class ClassifyActivity extends Activity {
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
-                al.remove(0);
+                transactions.remove(0);
                 arrayAdapter.notifyDataSetChanged();
             }
 
