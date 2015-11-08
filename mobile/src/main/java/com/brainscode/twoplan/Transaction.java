@@ -30,8 +30,6 @@ public class Transaction implements Serializable {
     }
 
 
-
-
     @Override
     public String toString() {
         return "Transaction{" +

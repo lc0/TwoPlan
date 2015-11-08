@@ -30,12 +30,9 @@ public class ClassifyActivity extends Activity {
 
         if (getIntent().getExtras() != null) {
             transactions = (List<Transaction>)getIntent().getExtras().getSerializable("transactions");
-            for(Transaction tr : transactions) {
-                Log.d("=======","Data " + tr.toString());
-            }
         }
 
-        final ArrayAdapter<Transaction> arrayAdapter = new ArrayAdapter<Transaction>(this, R.layout.item, R.id.helloText, transactions);
+        final ArrayAdapter<Transaction> arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, transactions);
 
         //set the listener and the adapter
         flingContainer.setAdapter(arrayAdapter);
@@ -53,12 +50,12 @@ public class ClassifyActivity extends Activity {
                 //Do something on the left!
                 //You also have access to the original object.
                 //If you want to use it just cast it (String) dataObject
-                Toast.makeText(ClassifyActivity.this, "Left!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClassifyActivity.this, getString(R.string.left), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                Toast.makeText(ClassifyActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClassifyActivity.this, getString(R.string.right), Toast.LENGTH_SHORT).show();
             }
 
             @Override
