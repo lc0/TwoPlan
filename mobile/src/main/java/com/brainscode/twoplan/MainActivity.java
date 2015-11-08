@@ -1,11 +1,17 @@
 package com.brainscode.twoplan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.Serializable;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,11 +20,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnFetchTransactions = (Button) findViewById(R.id.btnFetchTransactions);
+        final UnicreditWrapper unicreditWrapper = new UnicreditWrapper("e80cecaf-e421-46e2-b8cf-9546e992e8ef");
+        unicreditWrapper.execute();
+
+        final Button btnFetchTransactions = (Button) findViewById(R.id.btnFetchTransactions);
         btnFetchTransactions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                List<Transaction> transactions = unicreditWrapper.getTransactions();
+                if (transactions != null) {
+                    Log.d("transactions", transactions.toString());
+
+                    Intent intent = new Intent(getApplicationContext(), ClassifyActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("transactions", (Serializable) transactions);
+                    getApplicationContext().startActivity(intent);
+
+                    // TODO: wear?
+//                    for (int i=0; i<10; i++) {
+//                        Intent notificationIntent = new Intent();
+//                        intent.setAction("com.brainscode.twoplan.SHOW_NOTIFICATION");
+//                        intent.putExtra("New transaction", transactions.get(i).toString());
+//                        Log.d("notification", transactions.get(i).toString());
+//                        sendBroadcast(notificationIntent);
+//                    }
+                }
 
             }
         });
