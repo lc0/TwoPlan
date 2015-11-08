@@ -16,6 +16,6 @@ public class MyStubBroadcastActivity extends Activity {
         i.setAction("com.brainscode.twoplan.SHOW_NOTIFICATION");
         i.putExtra(MyPostNotificationReceiver.CONTENT_KEY, getString(R.string.title));
         sendBroadcast(i);
-        finish();
+//        finish();
     }
 }

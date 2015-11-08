@@ -1,5 +1,6 @@
 package com.brainscode.twoplan;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,18 +19,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final UnicreditWrapper unicreditWrapper = new UnicreditWrapper("e80cecaf-e421-46e2-b8cf-9546e992e8ef");
+        unicreditWrapper.execute();
+
         Button btnFetchTransactions = (Button) findViewById(R.id.btnFetchTransactions);
         btnFetchTransactions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                UnicreditWrapper unicreditWrapper = new UnicreditWrapper("e80cecaf-e421-46e2-b8cf-9546e992e8ef");
-                unicreditWrapper.execute();
-
                 List<Transaction> transactions = unicreditWrapper.getTransactions();
-
                 if (transactions != null) {
                     Log.d("transactions", transactions.toString());
+
+                    for (int i=0; i<10; i++) {
+                        Intent intent = new Intent();
+                        intent.setAction("com.brainscode.twoplan.SHOW_NOTIFICATION");
+                        intent.putExtra("New transaction", transactions.get(i).toString());
+                        Log.d("notification", transactions.get(i).toString());
+                        sendBroadcast(intent);
+                    }
                 }
 
             }

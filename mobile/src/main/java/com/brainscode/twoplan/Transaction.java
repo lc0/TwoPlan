@@ -6,6 +6,19 @@ package com.brainscode.twoplan;
 public class Transaction {
     String description;
     String currency;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
     double amount;
 
     public Transaction(double amount, String description, String currency) {

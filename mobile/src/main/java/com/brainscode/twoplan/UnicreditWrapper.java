@@ -1,5 +1,7 @@
 package com.brainscode.twoplan;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -102,7 +104,7 @@ public class UnicreditWrapper extends AsyncTask<String, Void, String> {
             transactionList.add(new Transaction(amount, description, currency));
         }
 
-        Log.i("JSON", "venues: " + transactionList);
+        Log.i("JSON", "transactions: " + transactionList);
         return transactionList;
     }
 
@@ -121,5 +123,11 @@ public class UnicreditWrapper extends AsyncTask<String, Void, String> {
             e.printStackTrace();
         }
         return answer;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        Log.d("Transactions", "loaded everything");
     }
 }
