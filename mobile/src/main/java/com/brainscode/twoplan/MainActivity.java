@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 List<Transaction> transactions = unicreditWrapper.getTransactions();
-                if (transactions != null) {
+                if (transactions != null && transactions.size() > 0) {
                     Log.d("transactions", transactions.toString());
                     Toast.makeText(getApplicationContext(), "Fetched " +
                             Integer.toString(transactions.size()) + " transactions", Toast.LENGTH_LONG).show();
