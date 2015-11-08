@@ -13,7 +13,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -49,7 +52,42 @@ public class TransactionLabel  extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
         }
 
+        String localUrl = "http://twoplan.herokuapp.com/saveexpense";
+        httpPost = new HttpPost(localUrl);
+        httpPost.setHeader("Content-Type", "application/json");
+
+        try {
+            httpPost.setEntity(new StringEntity(transaction.toJson(username), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            HttpResponse response = httpclient.execute(httpPost);
+            Log.d("sent data", convertStreamtoString(response.getEntity().getContent()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return null;
+    }
+
+
+    public String convertStreamtoString(InputStream is){
+
+        String line="";
+        String data="";
+        try{
+            BufferedReader br=new BufferedReader(new InputStreamReader(is));
+            while((line=br.readLine())!=null){
+
+                data+=line;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return  data;
     }
 
 }
