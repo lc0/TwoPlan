@@ -2,10 +2,14 @@ package com.brainscode.twoplan;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                UnicreditWrapper unicreditWrapper = new UnicreditWrapper("e80cecaf-e421-46e2-b8cf-9546e992e8ef");
+                unicreditWrapper.execute();
+
+                List<Transaction> transactions = unicreditWrapper.getTransactions();
+
+                if (transactions != null) {
+                    Log.d("transactions", transactions.toString());
+                }
 
             }
         });
