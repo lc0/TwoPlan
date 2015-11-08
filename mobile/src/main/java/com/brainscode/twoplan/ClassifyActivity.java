@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClassifyActivity extends Activity {
 
@@ -30,6 +31,13 @@ public class ClassifyActivity extends Activity {
         al.add("c");
         al.add("python");
         al.add("java");
+
+        if (getIntent().getExtras() != null) {
+            List<Transaction> transactions = (List<Transaction>)getIntent().getExtras().getSerializable("transactions");
+            for(Transaction tr : transactions) {
+                Log.d("=======","Data " + tr.toString());
+            }
+        }
 
         //choose your favorite adapter
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.item, R.id.helloText, al);

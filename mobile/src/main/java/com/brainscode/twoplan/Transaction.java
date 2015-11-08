@@ -1,9 +1,11 @@
 package com.brainscode.twoplan;
 
+import java.io.Serializable;
+
 /**
  * Created by khomenkos on 08/11/15.
  */
-public class Transaction {
+public class Transaction implements Serializable {
     String description;
     String currency;
 
